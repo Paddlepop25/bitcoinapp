@@ -7,6 +7,8 @@ import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http'; 
+import { FlexLayoutModule } from '@angular/flex-layout'; 
+
 
 import {
   MAT_MOMENT_DATE_FORMATS,
@@ -30,7 +32,8 @@ import { environment } from '../environments/environment';
     ReactiveFormsModule,
     MaterialModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    HttpClientModule
+    HttpClientModule,
+    FlexLayoutModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'en-SG'},

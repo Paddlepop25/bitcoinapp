@@ -7,6 +7,30 @@
 <div class="form">
   <form [formGroup]="form" (ngSubmit)="buyBitcoinForm()" autocomplete="off">
     <mat-form-field appearance="standard">
+      <mat-label>Name</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="e.g Wonder Woman"
+        formControlName="name"
+      />
+      <mat-hint>Enter your fullname (3 to 20 characters)</mat-hint>
+    </mat-form-field>
+    <div
+      *ngIf="
+        form.get('name').invalid &&
+        (form.get('name').dirty || form.get('name').touched)
+      "
+    >
+      <mat-error *ngIf="form.get('name').invalid"
+        >Enter your name (between 3 to 20 characters)</mat-error
+      >
+    </div>
+
+    <br />
+    <br />
+
+    <mat-form-field appearance="standard">
       <mat-label>Contact Number</mat-label>
       <input
         type="text"
@@ -33,30 +57,6 @@
     <br />
     <br />
 
-    <mat-form-field appearance="standard">
-      <mat-label>Name</mat-label>
-      <input
-        type="text"
-        matInput
-        placeholder="e.g Wonder Woman"
-        formControlName="name"
-      />
-      <mat-hint>Enter your fullname (3 to 20 characters)</mat-hint>
-    </mat-form-field>
-    <div
-      *ngIf="
-        form.get('name').invalid &&
-        (form.get('name').dirty || form.get('name').touched)
-      "
-    >
-      <mat-error *ngIf="form.get('name').invalid"
-        >Enter your name (between 3 to 20 characters)</mat-error
-      >
-    </div>
-
-    <br />
-    <br />
-
     <div>
       <mat-label>Gender: &nbsp;</mat-label>
       <mat-radio-group formControlName="gender">
@@ -71,22 +71,13 @@
 
     <mat-form-field>
       <!-- JS disables future dates in calendar -->
-      <script>
-        let today = document.getElementById("dob");
-        today.max = new Date(
-          new Date().getTime() - new Date().getTimezoneOffset() * 60000
-        )
-          .toISOString()
-          .split("T")[0];
-        console.log("today - ", today);
-      </script>
       <label>Date of Birth</label>
       <input
         matInput
         [matDatepicker]="dobpicker"
         formControlName="dob"
         id="dob"
-        max="2020-11-20"
+        [max]="today"
         (click)="above21Validator()"
       />
       <mat-datepicker-toggle
@@ -111,17 +102,13 @@
 
     <mat-form-field>
       <!-- JS disables past dates in calendar -->
-      <script>
-        let today = new Date().toISOString().split("T")[0];
-        document.getElementById("orderDate").setAttribute("min", today);
-      </script>
       <label>Order date:</label>
       <input
         matInput
         [matDatepicker]="orderDate"
         formControlName="orderDate"
         id="orderDate"
-        min="2020-11-10"
+        [min]="today"
       />
       <mat-datepicker-toggle
         matSuffix

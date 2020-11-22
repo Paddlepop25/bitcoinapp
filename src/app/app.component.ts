@@ -14,6 +14,7 @@ export class AppComponent {
   title = 'bitcoinapp';
   form: FormGroup;
   gender = ['Male', 'Female'];
+  today = new Date()
   orderType = ['Buy', 'Sell'];
   // value: number;
   bitcoinResult = {}
@@ -47,6 +48,10 @@ export class AppComponent {
     });
   }
 
+  ngOnInit() {
+  }
+  
+  
   // async ngOnInit(): Promise<void> {
   // }
 
@@ -74,6 +79,8 @@ export class AppComponent {
     console.log("reset form")
   }
 }
+
+
 
 // Validate the user's age from form control
 // Return null if validation passed and return object if validation failed
