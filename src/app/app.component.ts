@@ -48,10 +48,6 @@ export class AppComponent {
     });
   }
 
-  ngOnInit() {
-  }
-  
-  
   // async ngOnInit(): Promise<void> {
   // }
 
@@ -61,7 +57,7 @@ export class AppComponent {
   //   console.info(this.bitcoinResult);
   // }
 
-  buyBitcoinForm() {
+  buyBitcoinForm(form: FormGroupDirective) {
     // console.log('form submitted');
     // console.log('this.form ---> ', this.form);
     console.log('this.form.value ---> ', this.form.value);
@@ -70,13 +66,15 @@ export class AppComponent {
 
     // resets after clicking on submit
     this.form.reset()
+    form.resetForm(); // gives error in console
+    console.log("buyBitcoinForm activated")
   }
 
   // Browser console: cannot read property 'resetForm' of undefined at AppComponent.resetForm (app.component.ts:68)
   resetForm(form: FormGroupDirective) {
     this.form.reset();
+    console.log("resetForm activated")
     form.resetForm(); // gives error in console
-    console.log("reset form")
   }
 }
 
