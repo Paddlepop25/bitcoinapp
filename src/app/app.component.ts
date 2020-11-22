@@ -57,18 +57,48 @@ export class AppComponent {
   //   console.info(this.bitcoinResult);
   // }
 
-  buyBitcoinForm(formData: any, formGroupDirective: FormGroupDirective): void {
+  // html's buyBitcoin has 2 parameters "buyBitcoinForm(form, formDirective)"
+  buyBitcoinForm(form: any, formGroupDirective: FormGroupDirective): void {
     // resets after clicking on submit
     console.log('buyBitcoinForm activated ---> ', this.form.value);
-    formGroupDirective.resetForm(formData)
-    this.form.reset()
+    // formGroupDirective.resetForm(form)
+    // this.form.reset()
+    this.resetAll(form, formGroupDirective); 
   }
 
-  // Browser console: cannot read property 'resetForm' of undefined at AppComponent.resetForm (app.component.ts:68)
-  restartForm(form: FormGroupDirective): void {
-    form.reset();
-    // form.resetForm(); // gives error in console
+  // formDirective is passed from #formDirective from html
+  restartForm(form: any, formDirective: FormGroupDirective): void {
+    // console.log("resetForm ---> ", form)
+    // this.form.reset();
+    this.resetAll(form, formDirective);
     console.log("resetForm activated")
+  }
+
+  resetAll(form: any, formDirective : FormGroupDirective){
+    // this.form.reset();
+    form.reset();
+    formDirective.resetForm();
+    // Object.keys(this.form.controls).forEach(key => {
+    //   form.get(key).setErrors(null) ;
+    // });
+    this.nameFormControl.setValidators([Validators.required]);
+    this.nameFormControl.updateValueAndValidity();
+    this.contactNumberFormControl.setValidators([Validators.required]);
+    this.contactNumberFormControl.updateValueAndValidity();
+    this.dobFormControl.setValidators([Validators.required]);
+    this.dobFormControl.updateValueAndValidity();  
+    this.orderDateFormControl.setValidators([Validators.required]);
+    this.orderDateFormControl.updateValueAndValidity();  
+    this.orderUnitFormControl.setValidators([Validators.required]);
+    this.orderUnitFormControl.updateValueAndValidity();  
+    // this.cryptoBitcoinSGPriceFormControl.setValidators([Validators.required]);
+    // this.cryptoBitcoinSGPriceFormControl.updateValueAndValidity();  
+    this.qrCodeOrBitCoinAddressFormControl.setValidators([Validators.required]);
+    this.qrCodeOrBitCoinAddressFormControl.updateValueAndValidity();  
+    this.cryptoSGPriceFormControl.setValidators([Validators.required]);
+    this.cryptoSGPriceFormControl.updateValueAndValidity();  
+    // this.genderFormControl.setValidators([Validators.required]);
+    // this.genderFormControl.updateValueAndValidity();  
   }
 }
 
