@@ -6,270 +6,338 @@
 
 <div class="form">
   <form [formGroup]="form" (ngSubmit)="buyBitcoinForm()" autocomplete="off">
-    <div fxLayout="row">
-      <div fxFlexOffset="10" fxFlex="70">
-        <mat-form-field appearance="standard">
-          <mat-label>Full name</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="e.g Wonder Woman"
-            formControlName="name"
-          />
-          <mat-hint>Between 3 to 20 characters</mat-hint>
-          <mat-error
-            *ngIf="
-              form.get('name').invalid &&
-              (form.get('name').dirty || form.get('name').touched)
-            "
-          >
-            <mat-error *ngIf="form.get('name').invalid"
-              >Your name according to NRIC</mat-error
-            >
-          </mat-error>
-        </mat-form-field>
-      </div>
-    </div>
+    <mat-grid-list cols="2" rowHeight="200px">
+      <mat-grid-tile>
+        <div fxLayout="column">
+          <div fxFlexOffset="10" fxFlex="70">
+            <h3>Customer Details</h3>
+            <mat-form-field appearance="standard">
+              <mat-label>Full name</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="e.g Wonder Woman"
+                formControlName="name"
+              />
+              <mat-hint>Between 3 to 20 characters</mat-hint>
+              <mat-error
+                *ngIf="
+                  form.get('name').invalid &&
+                  (form.get('name').dirty || form.get('name').touched)
+                "
+              >
+                <mat-error *ngIf="form.get('name').invalid"
+                  >Your name according to NRIC</mat-error
+                >
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
 
-    <div fxLayout="row">
-      <div fxFlexOffset="10" fxFlex="70">
-        <mat-form-field appearance="standard">
-          <mat-label>Contact Number</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="e.g 81234567 or 91234567"
-            formControlName="contactNumber"
-          />
-          <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-          <!-- <i class="material-icons">face</i> -->
-          <mat-hint>Enter a Singapore mobile number</mat-hint>
-          <mat-error
-            *ngIf="
-              form.get('contactNumber').invalid &&
-              (form.get('contactNumber').dirty ||
-                form.get('contactNumber').touched)
-            "
-          >
-            <mat-error *ngIf="form.get('contactNumber').invalid"
-              >Enter a 8-digit number starting with "8" or "9"</mat-error
-            >
-          </mat-error>
-        </mat-form-field>
-      </div>
-    </div>
+        <div fxLayout="column">
+          <div fxFlexOffset="10" fxFlex="70">
+            <mat-form-field appearance="standard">
+              <mat-label>Contact Number</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="e.g 81234567 or 91234567"
+                formControlName="contactNumber"
+              />
+              <mat-hint>Enter a Singapore mobile number</mat-hint>
+              <mat-error
+                *ngIf="
+                  form.get('contactNumber').invalid &&
+                  (form.get('contactNumber').dirty ||
+                    form.get('contactNumber').touched)
+                "
+              >
+                <mat-error *ngIf="form.get('contactNumber').invalid"
+                  >Enter a 8-digit number starting with "8" or "9"</mat-error
+                >
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile> </mat-grid-tile>
+    </mat-grid-list>
 
-    <br />
+    <!--  -->
 
-    <div fxLayout="row">
-      <div fxFlexOffset="10" fxFlex="70">
-        <mat-label>Gender: &nbsp;</mat-label>
-        <mat-radio-group formControlName="gender">
-          <mat-radio-button *ngFor="let g of gender" value="{{ g }}"
-            >{{ g }} &nbsp;
-          </mat-radio-button>
-        </mat-radio-group>
-      </div>
-    </div>
-
-    <div fxLayout="row">
-      <div fxFlexOffset="10" fxFlex="70">
-        <mat-form-field>
-          <label>Date of Birth</label>
-          <input
-            matInput
-            [matDatepicker]="dobpicker"
-            formControlName="dob"
-            id="dob"
-            [max]="today"
-            (click)="above21Validator()"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="dobpicker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #dobpicker></mat-datepicker>
-          <mat-hint>dd/mm/yyyy</mat-hint>
-          <mat-error
-            *ngIf="
-              form.get('dob').invalid &&
-              (form.get('dob').dirty || form.get('dob').touched)
-            "
-            >Please indicate your age</mat-error
-          >
-          <mat-error *ngIf="form.get('dob').hasError('above21Validator')"
-            >You must be at least 21 years old</mat-error
-          >
-        </mat-form-field>
-      </div>
-    </div>
-
-    <div fxLayout="row">
-      <div fxFlexOffset="10" fxFlex="70">
-        <mat-form-field>
-          <label>Order date:</label>
-          <input
-            matInput
-            [matDatepicker]="orderDate"
-            formControlName="orderDate"
-            id="orderDate"
-            [min]="today"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="orderDate"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #orderDate></mat-datepicker>
-          <mat-hint>dd/mm/yyyy</mat-hint>
-          <mat-error
-            *ngIf="
-              form.get('orderDate').invalid &&
-              (form.get('orderDate').dirty || form.get('orderDate').touched)
-            "
-            >Please indicate a date</mat-error
-          >
-          <mat-error *ngIf="form.get('orderDate').invalid"
-            >The date is invalid</mat-error
-          >
-        </mat-form-field>
-      </div>
-    </div>
-
-    <br />
-
-    <div fxLayout="row">
-      <div fxFlexOffset="10" fxFlex="70">
-        <mat-form-field>
-          <mat-label>Order type</mat-label>
-          <mat-select formControlName="orderType">
-            <mat-option *ngFor="let type of orderType" [value]="type">{{
-              type
-            }}</mat-option>
-          </mat-select>
-          <mat-error
-            *ngIf="
-              form.get('orderType').invalid &&
-              (form.get('orderType').dirty || form.get('orderType').touched)
-            "
-          >
-            <mat-error *ngIf="form.get('orderType').invalid"
-              >Please select Buy or Sell</mat-error
-            >
-          </mat-error>
-        </mat-form-field>
-      </div>
-    </div>
-
-    <div fxLayout="row">
-      <div fxFlexOffset="10" fxFlex="70">
-        <mat-form-field appearance="standard">
-          <mat-label>Order unit(s)</mat-label>
-          <input
-            type="number"
-            onkeydown="javascript: return event.keyCode === 8 || event.keyCode === 46 ? true : !isNaN(Number(event.key))"
-            matInput
-            placeholder="e.g 10"
-            formControlName="orderUnit"
-          />
-          <mat-hint>Enter the buy/sell unit(s)</mat-hint>
-          <mat-error
-            *ngIf="
-              form.get('orderUnit').invalid &&
-              (form.get('orderUnit').dirty || form.get('orderUnit').touched)
-            "
-          >
-            <mat-error *ngIf="form.get('orderUnit').invalid"
-              >Minimum 1 unit</mat-error
-            >
-          </mat-error>
-        </mat-form-field>
-      </div>
-    </div>
-
-    <br />
-
-    <!-- DOESN'T WORK -->
-    <!-- get API of Cryptocurency Price whether buy(bid/ask) or sell (ask/bid) -->
-    <div fxLayout="row">
-      <div fxFlexOffset="10" fxFlex="70">
-        <label>Cryptocurency Pair (SGD/BTC) </label>
-        <br />
-        <ng-container *ngIf="form.get('orderType').value == 'Buy'">
-          <!-- <label formControlName="cryptoBitcoinSGPrice">$(bid/ask)</label> -->
-          <label>$(bid/ask)</label>
-        </ng-container>
-        <ng-container *ngIf="form.get('orderType').value == 'Sell'">
-          <!-- <label formControlName="cryptoBitcoinSGPrice">$(ask/bid)</label> -->
-          <label>$(ask/bid)</label>
-        </ng-container>
-      </div>
-    </div>
-
-    <div fxLayout="row">
-      <div fxFlexOffset="10" fxFlex="70">
-        <div *ngIf="form.get('orderType').value == 'Buy'">
+    <!-- <div class="box1"> -->
+    <div class="container">
+      <div fxLayout="row">
+        <div fxFlexOffset="10" fxFlex="70">
+          <h3>Customer Details</h3>
           <mat-form-field appearance="standard">
-            <mat-label>Bitcoin address</mat-label>
+            <mat-label>Full name</mat-label>
             <input
               type="text"
               matInput
-              placeholder="e.g 8Zbgi29cpjq2GjdwV8eyHuJJnkLtktZc5"
-              formControlName="qrCodeOrBitCoinAddress"
+              placeholder="e.g Wonder Woman"
+              formControlName="name"
             />
-            <mat-hint>Your bitcoin address</mat-hint>
+            <mat-hint>Between 3 to 20 characters</mat-hint>
             <mat-error
               *ngIf="
-                form.get('orderType').value == 'Buy' &&
-                (form.get('qrCodeOrBitCoinAddress').dirty ||
-                  form.get('qrCodeOrBitCoinAddress').touched)
+                form.get('name').invalid &&
+                (form.get('name').dirty || form.get('name').touched)
               "
             >
-              <mat-error *ngIf="form.get('qrCodeOrBitCoinAddress').invalid"
-                >Please enter your Bitcoin address</mat-error
+              <mat-error *ngIf="form.get('name').invalid"
+                >Your name according to NRIC</mat-error
               >
             </mat-error>
           </mat-form-field>
         </div>
       </div>
-    </div>
 
-    <div fxLayout="row">
-      <div fxFlexOffset="10" fxFlex="70">
-        <div *ngIf="form.get('orderType').value == 'Sell'">
+      <div fxLayout="row">
+        <div fxFlexOffset="10" fxFlex="70">
           <mat-form-field appearance="standard">
-            <mat-label>QR Code Url</mat-label>
+            <mat-label>Contact Number</mat-label>
             <input
               type="text"
               matInput
-              placeholder="e.g https://qrCodeUrl@kaching.com"
-              formControlName="qrCodeOrBitCoinAddress"
+              placeholder="e.g 81234567 or 91234567"
+              formControlName="contactNumber"
             />
-            <mat-hint>Your Paylah/Paynow QR Code URL</mat-hint>
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <!-- <i class="material-icons">face</i> -->
+            <mat-hint>Enter a Singapore mobile number</mat-hint>
             <mat-error
               *ngIf="
-                form.get('orderType').value == 'Sell' &&
-                (form.get('qrCodeOrBitCoinAddress').dirty ||
-                  form.get('qrCodeOrBitCoinAddress').touched)
+                form.get('contactNumber').invalid &&
+                (form.get('contactNumber').dirty ||
+                  form.get('contactNumber').touched)
               "
             >
-              <mat-error *ngIf="form.get('qrCodeOrBitCoinAddress').invalid"
-                >Please enter your QR Code Url</mat-error
+              <mat-error *ngIf="form.get('contactNumber').invalid"
+                >Enter a 8-digit number starting with "8" or "9"</mat-error
               >
             </mat-error>
           </mat-form-field>
         </div>
       </div>
-    </div>
 
-    <!-- DOESN'T WORK (waiting to get API working for the ask / bid price) -->
-    <!-- display the price by orderUnit x cryptoBitcoinSGPrice in app.component.ts -->
-    <div fxLayout="row">
-      <div fxFlexOffset="10" fxFlex="70">
-        <label>Equivalent Amount in SGD$ </label>
-        <!-- <label formControlName="cryptoSGPrice">$...</label> -->
+      <br />
+
+      <div fxLayout="row">
+        <div fxFlexOffset="10" fxFlex="70">
+          <mat-label class="move">Gender: &nbsp;</mat-label>
+          <mat-radio-group formControlName="gender">
+            <mat-radio-button *ngFor="let g of gender" value="{{ g }}"
+              >{{ g }} &nbsp;
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
       </div>
+
+      <div fxLayout="row">
+        <div fxFlexOffset="10" fxFlex="70">
+          <mat-form-field>
+            <label>Date of Birth</label>
+            <input
+              matInput
+              [matDatepicker]="dobpicker"
+              formControlName="dob"
+              id="dob"
+              [max]="today"
+              (click)="above21Validator()"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="dobpicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #dobpicker></mat-datepicker>
+            <mat-hint>dd/mm/yyyy</mat-hint>
+            <mat-error
+              *ngIf="
+                form.get('dob').invalid &&
+                (form.get('dob').dirty || form.get('dob').touched)
+              "
+              >Please indicate your birth date</mat-error
+            >
+            <mat-error *ngIf="form.get('dob').hasError('above21Validator')"
+              >You must be at least 21 years old</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- </div> -->
+      <br />
+      <br />
+
+      <!-- <div class="box2"> -->
+      <div fxLayout="row">
+        <div fxFlexOffset="10" fxFlex="70">
+          <h3>Bitcoin Transaction</h3>
+          <mat-form-field>
+            <label>Order date:</label>
+            <input
+              matInput
+              [matDatepicker]="orderDate"
+              formControlName="orderDate"
+              id="orderDate"
+              [min]="today"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="orderDate"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #orderDate></mat-datepicker>
+            <mat-hint>dd/mm/yyyy</mat-hint>
+            <mat-error
+              *ngIf="
+                form.get('orderDate').invalid &&
+                (form.get('orderDate').dirty || form.get('orderDate').touched)
+              "
+              >Please indicate a date</mat-error
+            >
+            <mat-error *ngIf="form.get('orderDate').invalid"
+              >The date is invalid</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </div>
+
+      <br />
+
+      <div fxLayout="row">
+        <div fxFlexOffset="10" fxFlex="70">
+          <mat-form-field>
+            <mat-label>Order type</mat-label>
+            <mat-select formControlName="orderType">
+              <mat-option *ngFor="let type of orderType" [value]="type">{{
+                type
+              }}</mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="
+                form.get('orderType').invalid &&
+                (form.get('orderType').dirty || form.get('orderType').touched)
+              "
+            >
+              <mat-error *ngIf="form.get('orderType').invalid"
+                >Please select Buy or Sell</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row">
+        <div fxFlexOffset="10" fxFlex="70">
+          <mat-form-field appearance="standard">
+            <mat-label>Order unit(s)</mat-label>
+            <input
+              type="number"
+              onkeydown="javascript: return event.keyCode === 8 || event.keyCode === 46 ? true : !isNaN(Number(event.key))"
+              matInput
+              placeholder="e.g 10"
+              formControlName="orderUnit"
+            />
+            <mat-hint>Enter the buy/sell unit(s)</mat-hint>
+            <mat-error
+              *ngIf="
+                form.get('orderUnit').invalid &&
+                (form.get('orderUnit').dirty || form.get('orderUnit').touched)
+              "
+            >
+              <mat-error *ngIf="form.get('orderUnit').invalid"
+                >Minimum 1 unit</mat-error
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <br />
+
+      <!-- DOESN'T WORK -->
+      <!-- get API of Cryptocurency Price whether buy(bid/ask) or sell (ask/bid) -->
+      <div fxLayout="row">
+        <div fxFlexOffset="10" fxFlex="70">
+          <mat-label class="move">Cryptocurency Pair (SGD/BTC) </mat-label>
+          <br />
+          <ng-container *ngIf="form.get('orderType').value == 'Buy'">
+            <!-- <label formControlName="cryptoBitcoinSGPrice">$(bid/ask)</label> -->
+            <label>$(bid/ask)</label>
+          </ng-container>
+          <ng-container *ngIf="form.get('orderType').value == 'Sell'">
+            <!-- <label formControlName="cryptoBitcoinSGPrice">$(ask/bid)</label> -->
+            <mat-label>$(ask/bid)</mat-label>
+          </ng-container>
+        </div>
+      </div>
+
+      <div fxLayout="row">
+        <div fxFlexOffset="10" fxFlex="70">
+          <div *ngIf="form.get('orderType').value == 'Buy'">
+            <mat-form-field appearance="standard">
+              <mat-label>Bitcoin address</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="e.g 8Zbgi29cpjq2GjdwV8eyHuJJnkLtktZc5"
+                formControlName="qrCodeOrBitCoinAddress"
+              />
+              <mat-hint>Your bitcoin address</mat-hint>
+              <mat-error
+                *ngIf="
+                  form.get('orderType').value == 'Buy' &&
+                  (form.get('qrCodeOrBitCoinAddress').dirty ||
+                    form.get('qrCodeOrBitCoinAddress').touched)
+                "
+              >
+                <mat-error *ngIf="form.get('qrCodeOrBitCoinAddress').invalid"
+                  >Please enter your Bitcoin address</mat-error
+                >
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row">
+        <div fxFlexOffset="10" fxFlex="70">
+          <div *ngIf="form.get('orderType').value == 'Sell'">
+            <mat-form-field appearance="standard">
+              <mat-label>QR Code Url</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="e.g https://qrCodeUrl@kaching.com"
+                formControlName="qrCodeOrBitCoinAddress"
+              />
+              <mat-hint>Your Paylah/Paynow QR Code URL</mat-hint>
+              <mat-error
+                *ngIf="
+                  form.get('orderType').value == 'Sell' &&
+                  (form.get('qrCodeOrBitCoinAddress').dirty ||
+                    form.get('qrCodeOrBitCoinAddress').touched)
+                "
+              >
+                <mat-error *ngIf="form.get('qrCodeOrBitCoinAddress').invalid"
+                  >Please enter your QR Code Url</mat-error
+                >
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOESN'T WORK (waiting to get API working for the ask / bid price) -->
+      <!-- display the price by orderUnit x cryptoBitcoinSGPrice in app.component.ts -->
+      <div fxLayout="row">
+        <div fxFlexOffset="10" fxFlex="70">
+          <label class="move">Equivalent Amount in SGD$ </label>
+          <!-- <label formControlName="cryptoSGPrice">$...</label> -->
+        </div>
+      </div>
+      <br />
     </div>
-    <br />
 
     <div fxLayout="row" fxLayoutGap="2vw" fxLayoutAlign="center">
       <button
@@ -284,5 +352,6 @@
         Reset
       </button>
     </div>
+    <!-- </div> -->
   </form>
 </div>

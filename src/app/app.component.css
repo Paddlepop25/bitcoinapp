@@ -12,6 +12,48 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-/* .text-danger {
-  color: red;
+mat-grid-tile {
+  background: rgb(221, 246, 255);
+}
+
+mat-grid-list {
+  height: 10vh;
+}
+
+.container {
+  background: #f2f4ff;
+  width: 70%;
+  margin: 20px auto;
+  padding-top: 30px;
+  border-radius: 20px;
+}
+
+/* .form {
+} */
+
+mat-form-field,
+h3,
+.move {
+  width: 100%;
+  margin-left: 1rem;
+}
+
+button {
+  width: 80px;
+  margin-bottom: 20px;
+}
+
+/* 
+.form {
+  background: red;
+}
+
+.box1 {
+  background: lightblue;
+  width: 50vw;
+}
+
+.box2 {
+  background: lightgreen;
+  width: 50vw;
 } */

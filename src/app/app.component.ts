@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl,  FormBuilder, Validators, AbstractControl, FormGroupDirective } from '@angular/forms';
-// import { BitcoinService } from './bitcoinservice.service'
+import { BitcoinService } from './bitcoinservice.service'
 
 // import { BuyBitcoin } from './buybitcoin';
 

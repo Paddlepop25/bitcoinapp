@@ -10,6 +10,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const MATERIAL = [
     MatButtonModule,
@@ -22,7 +23,8 @@ const MATERIAL = [
     MatRadioModule,
     MatToolbarModule,
     MatDividerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatGridListModule
 ];
 
 @NgModule ({
