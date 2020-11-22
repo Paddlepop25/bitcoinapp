@@ -57,28 +57,20 @@ export class AppComponent {
   //   console.info(this.bitcoinResult);
   // }
 
-  buyBitcoinForm(form: FormGroupDirective) {
-    // console.log('form submitted');
-    // console.log('this.form ---> ', this.form);
-    console.log('this.form.value ---> ', this.form.value);
-    // console.log('this.form.value.orderType ---> ', this.form.value.orderType);
-    // console.log('this.form.value.contactNumber ---> ', this.form.value.contactNumber);
-
+  buyBitcoinForm(formData: any, formGroupDirective: FormGroupDirective): void {
     // resets after clicking on submit
+    console.log('buyBitcoinForm activated ---> ', this.form.value);
+    formGroupDirective.resetForm(formData)
     this.form.reset()
-    form.resetForm(); // gives error in console
-    console.log("buyBitcoinForm activated")
   }
 
   // Browser console: cannot read property 'resetForm' of undefined at AppComponent.resetForm (app.component.ts:68)
-  resetForm(form: FormGroupDirective) {
-    this.form.reset();
+  restartForm(form: FormGroupDirective): void {
+    form.reset();
+    // form.resetForm(); // gives error in console
     console.log("resetForm activated")
-    form.resetForm(); // gives error in console
   }
 }
-
-
 
 // Validate the user's age from form control
 // Return null if validation passed and return object if validation failed

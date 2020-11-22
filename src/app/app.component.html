@@ -5,8 +5,14 @@
 </mat-toolbar>
 
 <div class="form">
-  <form [formGroup]="form" (ngSubmit)="buyBitcoinForm()" autocomplete="off">
-    <mat-grid-list cols="2" rowHeight="200px">
+  <!-- <form [formGroup]="form" (ngSubmit)="buyBitcoinForm()" autocomplete="off"> -->
+  <form
+    [formGroup]="form"
+    #formDirective="ngForm"
+    (ngSubmit)="buyBitcoinForm(form, formDirective)"
+    autocomplete="off"
+  >
+    <!-- <mat-grid-list cols="2" rowHeight="200px">
       <mat-grid-tile>
         <div fxLayout="column">
           <div fxFlexOffset="10" fxFlex="70">
@@ -61,11 +67,10 @@
         </div>
       </mat-grid-tile>
       <mat-grid-tile> </mat-grid-tile>
-    </mat-grid-list>
+    </mat-grid-list> -->
 
     <!--  -->
 
-    <!-- <div class="box1"> -->
     <div class="container">
       <div fxLayout="row">
         <div fxFlexOffset="10" fxFlex="70">
@@ -127,7 +132,11 @@
         <div fxFlexOffset="10" fxFlex="70">
           <mat-label class="move">Gender: &nbsp;</mat-label>
           <mat-radio-group formControlName="gender">
-            <mat-radio-button *ngFor="let g of gender" value="{{ g }}"
+            <br />
+            <mat-radio-button
+              *ngFor="let g of gender"
+              value="{{ g }}"
+              class="move"
               >{{ g }} &nbsp;
             </mat-radio-button>
           </mat-radio-group>
@@ -165,11 +174,9 @@
           </mat-form-field>
         </div>
       </div>
-      <!-- </div> -->
       <br />
       <br />
 
-      <!-- <div class="box2"> -->
       <div fxLayout="row">
         <div fxFlexOffset="10" fxFlex="70">
           <h3>Bitcoin Transaction</h3>
@@ -259,7 +266,7 @@
       <!-- get API of Cryptocurency Price whether buy(bid/ask) or sell (ask/bid) -->
       <div fxLayout="row">
         <div fxFlexOffset="10" fxFlex="70">
-          <mat-label class="move">Cryptocurency Pair (SGD/BTC) </mat-label>
+          <mat-label class="move">SGD/BTC </mat-label>
           <br />
           <ng-container *ngIf="form.get('orderType').value == 'Buy'">
             <!-- <label formControlName="cryptoBitcoinSGPrice">$(bid/ask)</label> -->
@@ -328,11 +335,13 @@
         </div>
       </div>
 
+      <br />
+
       <!-- DOESN'T WORK (waiting to get API working for the ask / bid price) -->
       <!-- display the price by orderUnit x cryptoBitcoinSGPrice in app.component.ts -->
       <div fxLayout="row">
         <div fxFlexOffset="10" fxFlex="70">
-          <label class="move">Equivalent Amount in SGD$ </label>
+          <label class="move">SGD$ </label>
           <!-- <label formControlName="cryptoSGPrice">$...</label> -->
         </div>
       </div>
@@ -348,10 +357,9 @@
       >
         Add
       </button>
-      <button mat-raised-button color="warn" (click)="resetForm()">
+      <button mat-raised-button color="warn" (click)="restartForm(form)">
         Reset
       </button>
     </div>
-    <!-- </div> -->
   </form>
 </div>

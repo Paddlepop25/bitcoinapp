@@ -25,6 +25,7 @@ mat-grid-list {
   width: 70%;
   margin: 20px auto;
   padding-top: 30px;
+  padding-bottom: 20px;
   border-radius: 20px;
 }
 
@@ -36,24 +37,10 @@ h3,
 .move {
   width: 100%;
   margin-left: 1rem;
+  margin-bottom: 5px;
 }
 
 button {
   width: 80px;
   margin-bottom: 20px;
 }
-
-/* 
-.form {
-  background: red;
-}
-
-.box1 {
-  background: lightblue;
-  width: 50vw;
-}
-
-.box2 {
-  background: lightgreen;
-  width: 50vw;
-} */
