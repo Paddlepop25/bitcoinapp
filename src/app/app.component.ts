@@ -57,22 +57,6 @@ export class AppComponent {
   }
 
   // html's buyBitcoin has 2 parameters "buyBitcoinForm(form, formDirective)"
-  // buyBitcoinForm(form: any, formGroupDirective: FormGroupDirective): void {
-  //   console.log('buyBitcoinForm ---> ', this.form.value);
-  //   // formGroupDirective.resetForm(form)
-  //   // this.form.reset()
-  //   this.resetAll(this.form, formGroupDirective); 
-  //   console.log('buyBitcoinForm activated');
-  // }
-
-  // // formDirective is passed from #formDirective from html
-  // restartForm(formGroupDirective: FormGroupDirective): void {
-  //   console.log("resetForm ---> ", formGroupDirective)
-  //   // this.form.reset()
-  //   this.resetAll(this.form, formGroupDirective);
-  //   console.log("resetForm activated")
-  // }
-
   buyBitcoinForm(formData: any, formGroupDirective: FormGroupDirective): void {
     console.log('buyBitcoinForm activated ---> ', this.form.value);
     // this.myForm.reset();
@@ -81,10 +65,10 @@ export class AppComponent {
     // console.log('buyBitcoinForm activated');
   }
 
+  // formDirective is passed from #formDirective from html
   restartForm(form: FormGroupDirective): void {
     // console.log("resetForm ---> ", form)
     this.form.reset();
-    // form.resetAll(); // gives error in console
     // console.log("resetForm activated")
   }
 }

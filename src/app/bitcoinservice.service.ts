@@ -8,10 +8,8 @@ import { Injectable } from '@angular/core';
 export class BitcoinService {
   constructor(private http: HttpClient) { }
       
-  getBitcoinRate(): Promise<any> {
-    const endpoint = 'https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCSGD'
-    const apikey = 'OTNmYTIyOTMzZGVhNDRkNDhkYjYyOGUzYTRiNTc2NDM'
-    const headers = new HttpHeaders().set('x-ba-key', apikey)
-    return this.http.get(endpoint, { headers: headers }).toPromise()
+  async getBitcoinRate(): Promise<any> {
+    // request from localhost:3000 (express) which is requesting from https://apiv2.bitcoinaverage.com
+    return await this.http.get<any>('http://localhost:3000/bitcoinaverage').toPromise()
   }
 }
