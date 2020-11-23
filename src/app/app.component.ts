@@ -16,7 +16,12 @@ export class AppComponent {
   gender = ['Male', 'Female'];
   today = new Date()
   orderType = ['Buy', 'Sell'];
-  bitcoinResult = {}
+  bitcoinResult = []
+  // @ts-ignore
+  bitcoinBuy = this.bitcoinResult['ask'] // pass to html
+  // @ts-ignore
+  bitcoinSell = this.bitcoinResult['bid'] // pass to html
+  bitcoinBuyPrice = 0;
 
   // expected validations in comments
   contactNumberFormControl = new FormControl('', [Validators.required, Validators.pattern(/(8|9)\d{7}$/)]); // must be valid Singapore mobile, should not contain invalid characters, +, -, space, and round brackets are allowed
@@ -31,7 +36,6 @@ export class AppComponent {
   genderFormControl = new FormControl('', []);
   
   constructor(private bitcoinSvc: BitcoinService, private fb: FormBuilder){
-  // constructor(private fb: FormBuilder){
     this.form = fb.group({
       "contactNumber": this.contactNumberFormControl,
       "name": this.nameFormControl,
@@ -49,13 +53,25 @@ export class AppComponent {
   async ngOnInit(): Promise<void> {
     this.bitcoinResult = await this.bitcoinSvc.getBitcoinRate()
     console.info('>> contents: ', this.bitcoinResult)
+    // @ts-ignore
+    console.info('>> ask: ', this.bitcoinResult['ask'])
+    // @ts-ignore
+    console.info('>> bid: ', this.bitcoinResult.bid)
   }
 
-  async getBitcoinRate() {
-    // console.info(typeof(this.bitcoinSvc));
-    this.bitcoinResult = await (this.bitcoinSvc.getBitcoinRate());
-    console.info(typeof(this.bitcoinResult));
-    console.info(this.bitcoinResult);
+  // why is the console.log 4x?
+  bitcoinBuyRate() {
+    if (this.orderTypeFormControl.value == "Buy") {
+      // @ts-ignore
+      this.bitcoinBuyPrice = (this.bitcoinResult['ask'] * this.orderUnitFormControl.value).toFixed(2)
+      console.log('this.bitcoinBuyPrice --->', this.bitcoinBuyPrice)
+    }
+    if (this.orderTypeFormControl.value == "Sell") {
+      // @ts-ignore
+      this.bitcoinBuyPrice = (this.bitcoinResult['bid'] * this.orderUnitFormControl.value).toFixed(2)
+      console.log('this.bitcoinBuyPrice --->', this.bitcoinBuyPrice)
+    }
+    // console.log('this.form.orderUnitFormControl --->', this.orderUnitFormControl.value)
   }
 
   // html's buyBitcoin has 2 parameters "buyBitcoinForm(form, formDirective)"

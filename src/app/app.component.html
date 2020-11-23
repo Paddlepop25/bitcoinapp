@@ -184,6 +184,7 @@
               matInput
               placeholder="e.g 10"
               formControlName="orderUnit"
+              (click)="bitcoinBuyRate()"
             />
             <mat-hint>Enter the buy/sell unit(s)</mat-hint>
             <mat-error
@@ -203,18 +204,15 @@
       <br />
 
       <!-- DOESN'T WORK -->
-      <!-- get API of Cryptocurency Price whether buy(bid/ask) or sell (ask/bid) -->
       <div fxLayout="row">
         <div fxFlexOffset="10" fxFlex="70">
           <mat-label class="move">SGD/BTC </mat-label>
           <br />
           <ng-container *ngIf="form.get('orderType').value == 'Buy'">
-            <!-- <label formControlName="cryptoBitcoinSGPrice">$(bid/ask)</label> -->
-            <label class="move">$(bid/ask)</label>
+            <label class="move">${{ bitcoinBuy }}</label>
           </ng-container>
           <ng-container *ngIf="form.get('orderType').value == 'Sell'">
-            <!-- <label formControlName="cryptoBitcoinSGPrice">$(ask/bid)</label> -->
-            <mat-label class="move">$(ask/bid)</mat-label>
+            <mat-label class="move">${{ bitcoinSell }}</mat-label>
           </ng-container>
         </div>
       </div>
@@ -277,12 +275,18 @@
 
       <br />
 
-      <!-- DOESN'T WORK (waiting to get API working for the ask / bid price) -->
-      <!-- display the price by orderUnit x cryptoBitcoinSGPrice in app.component.ts -->
       <div fxLayout="row">
         <div fxFlexOffset="10" fxFlex="70">
-          <label class="move">SGD$ </label>
-          <!-- <label formControlName="cryptoSGPrice">$...</label> -->
+          <ng-container
+            *ngIf="
+              form.get('orderType').value == 'Buy' &&
+              (form.get('orderUnit').dirty || form.get('orderUnit').touched)
+            "
+          >
+          </ng-container>
+          <label formControlName="cryptoSGPrice" class="move"
+            >The amount is SGD${{ bitcoinBuyPrice }}
+          </label>
         </div>
       </div>
       <br />
