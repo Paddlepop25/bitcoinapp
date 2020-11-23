@@ -47,10 +47,12 @@ export class AppComponent {
   }
 
   async ngOnInit(): Promise<void> {
+    this.bitcoinResult = await this.bitcoinSvc.getBitcoinRate()
+    console.info('>> contents: ', this.bitcoinResult)
   }
 
   async getBitcoinRate() {
-    console.info(typeof(this.bitcoinSvc));
+    // console.info(typeof(this.bitcoinSvc));
     this.bitcoinResult = await (this.bitcoinSvc.getBitcoinRate());
     console.info(typeof(this.bitcoinResult));
     console.info(this.bitcoinResult);
