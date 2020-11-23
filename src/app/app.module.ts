@@ -8,8 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http'; 
 import { FlexLayoutModule } from '@angular/flex-layout'; 
-
-
 import {
   MAT_MOMENT_DATE_FORMATS,
   MomentDateAdapter,
@@ -22,7 +20,8 @@ import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
   ],
   imports: [
     BrowserModule,

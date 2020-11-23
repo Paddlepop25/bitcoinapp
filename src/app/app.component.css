@@ -29,11 +29,7 @@ mat-grid-list {
   border-radius: 20px;
 }
 
-/* .form {
-} */
-
 mat-form-field,
-h3,
 .move {
   width: 100%;
   margin-left: 1rem;

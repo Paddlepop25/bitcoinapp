@@ -5,76 +5,16 @@
 </mat-toolbar>
 
 <div class="form">
-  <!-- <form [formGroup]="form" (ngSubmit)="buyBitcoinForm()" autocomplete="off"> -->
   <form
     [formGroup]="form"
     #formDirective="ngForm"
     (ngSubmit)="buyBitcoinForm(form, formDirective)"
     autocomplete="off"
   >
-    <!-- <mat-grid-list cols="2" rowHeight="200px">
-      <mat-grid-tile>
-        <div fxLayout="column">
-          <div fxFlexOffset="10" fxFlex="70">
-            <h3>Customer Details</h3>
-            <mat-form-field appearance="standard">
-              <mat-label>Full name</mat-label>
-              <input
-                type="text"
-                matInput
-                placeholder="e.g Wonder Woman"
-                formControlName="name"
-              />
-              <mat-hint>Between 3 to 20 characters</mat-hint>
-              <mat-error
-                *ngIf="
-                  form.get('name').invalid &&
-                  (form.get('name').dirty || form.get('name').touched)
-                "
-              >
-                <mat-error *ngIf="form.get('name').invalid"
-                  >Your name according to NRIC</mat-error
-                >
-              </mat-error>
-            </mat-form-field>
-          </div>
-        </div>
-
-        <div fxLayout="column">
-          <div fxFlexOffset="10" fxFlex="70">
-            <mat-form-field appearance="standard">
-              <mat-label>Contact Number</mat-label>
-              <input
-                type="text"
-                matInput
-                placeholder="e.g 81234567 or 91234567"
-                formControlName="contactNumber"
-              />
-              <mat-hint>Enter a Singapore mobile number</mat-hint>
-              <mat-error
-                *ngIf="
-                  form.get('contactNumber').invalid &&
-                  (form.get('contactNumber').dirty ||
-                    form.get('contactNumber').touched)
-                "
-              >
-                <mat-error *ngIf="form.get('contactNumber').invalid"
-                  >Enter a 8-digit number starting with "8" or "9"</mat-error
-                >
-              </mat-error>
-            </mat-form-field>
-          </div>
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile> </mat-grid-tile>
-    </mat-grid-list> -->
-
-    <!--  -->
-
     <div class="container">
       <div fxLayout="row">
         <div fxFlexOffset="10" fxFlex="70">
-          <h3>Customer Details</h3>
+          <h2 class="move">Customer Details</h2>
           <mat-form-field appearance="standard">
             <mat-label>Full name</mat-label>
             <input
@@ -179,7 +119,7 @@
 
       <div fxLayout="row">
         <div fxFlexOffset="10" fxFlex="70">
-          <h3>Bitcoin Transaction</h3>
+          <h2 class="move">Bitcoin Transaction</h2>
           <mat-form-field>
             <label>Order date:</label>
             <input
@@ -360,7 +300,7 @@
       <button
         mat-raised-button
         color="warn"
-        (click)="restartForm(form, formDirective)"
+        (click)="restartForm(formDirective)"
       >
         Reset
       </button>

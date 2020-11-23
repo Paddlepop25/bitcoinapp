@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl,  FormBuilder, Validators, AbstractControl, FormGroupDirective } from '@angular/forms';
 import { BitcoinService } from './bitcoinservice.service'
 
-// import { BuyBitcoin } from './buybitcoin';
+import { BuyBitcoin } from './buybitcoin';
 
 @Component({
   selector: 'app-root',
@@ -16,11 +16,9 @@ export class AppComponent {
   gender = ['Male', 'Female'];
   today = new Date()
   orderType = ['Buy', 'Sell'];
-  // value: number;
   bitcoinResult = {}
 
   // expected validations in comments
-  // all fields are required
   contactNumberFormControl = new FormControl('', [Validators.required, Validators.pattern(/(8|9)\d{7}$/)]); // must be valid Singapore mobile, should not contain invalid characters, +, -, space, and round brackets are allowed
   nameFormControl = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]); // min length = 3, max length = 20
   dobFormControl = new FormControl('', [Validators.required, above21Validator]); // at least 21 years old
@@ -32,8 +30,8 @@ export class AppComponent {
   cryptoSGPriceFormControl = new FormControl('', []); // must be in decimal
   genderFormControl = new FormControl('', []);
   
-  // constructor(private bitcoinSvc: BitcoinService, private fb: FormBuilder){
-  constructor(private fb: FormBuilder){
+  constructor(private bitcoinSvc: BitcoinService, private fb: FormBuilder){
+  // constructor(private fb: FormBuilder){
     this.form = fb.group({
       "contactNumber": this.contactNumberFormControl,
       "name": this.nameFormControl,
@@ -48,57 +46,46 @@ export class AppComponent {
     });
   }
 
-  // async ngOnInit(): Promise<void> {
-  // }
+  async ngOnInit(): Promise<void> {
+  }
 
-  // async getBitcoinRate() {
-  //   this.bitcoinResult = await (this.bitcoinSvc.getBitcoinRate());
-  //   console.info(typeof(this.bitcoinResult));
-  //   console.info(this.bitcoinResult);
-  // }
+  async getBitcoinRate() {
+    console.info(typeof(this.bitcoinSvc));
+    this.bitcoinResult = await (this.bitcoinSvc.getBitcoinRate());
+    console.info(typeof(this.bitcoinResult));
+    console.info(this.bitcoinResult);
+  }
 
   // html's buyBitcoin has 2 parameters "buyBitcoinForm(form, formDirective)"
-  buyBitcoinForm(form: any, formGroupDirective: FormGroupDirective): void {
-    // resets after clicking on submit
+  // buyBitcoinForm(form: any, formGroupDirective: FormGroupDirective): void {
+  //   console.log('buyBitcoinForm ---> ', this.form.value);
+  //   // formGroupDirective.resetForm(form)
+  //   // this.form.reset()
+  //   this.resetAll(this.form, formGroupDirective); 
+  //   console.log('buyBitcoinForm activated');
+  // }
+
+  // // formDirective is passed from #formDirective from html
+  // restartForm(formGroupDirective: FormGroupDirective): void {
+  //   console.log("resetForm ---> ", formGroupDirective)
+  //   // this.form.reset()
+  //   this.resetAll(this.form, formGroupDirective);
+  //   console.log("resetForm activated")
+  // }
+
+  buyBitcoinForm(formData: any, formGroupDirective: FormGroupDirective): void {
     console.log('buyBitcoinForm activated ---> ', this.form.value);
-    // formGroupDirective.resetForm(form)
-    // this.form.reset()
-    this.resetAll(form, formGroupDirective); 
+    // this.myForm.reset();
+    formGroupDirective.resetForm()
+    this.form.reset()
+    // console.log('buyBitcoinForm activated');
   }
 
-  // formDirective is passed from #formDirective from html
-  restartForm(form: any, formDirective: FormGroupDirective): void {
+  restartForm(form: FormGroupDirective): void {
     // console.log("resetForm ---> ", form)
-    // this.form.reset();
-    this.resetAll(form, formDirective);
-    console.log("resetForm activated")
-  }
-
-  resetAll(form: any, formDirective : FormGroupDirective){
-    // this.form.reset();
-    form.reset();
-    formDirective.resetForm();
-    // Object.keys(this.form.controls).forEach(key => {
-    //   form.get(key).setErrors(null) ;
-    // });
-    this.nameFormControl.setValidators([Validators.required]);
-    this.nameFormControl.updateValueAndValidity();
-    this.contactNumberFormControl.setValidators([Validators.required]);
-    this.contactNumberFormControl.updateValueAndValidity();
-    this.dobFormControl.setValidators([Validators.required]);
-    this.dobFormControl.updateValueAndValidity();  
-    this.orderDateFormControl.setValidators([Validators.required]);
-    this.orderDateFormControl.updateValueAndValidity();  
-    this.orderUnitFormControl.setValidators([Validators.required]);
-    this.orderUnitFormControl.updateValueAndValidity();  
-    // this.cryptoBitcoinSGPriceFormControl.setValidators([Validators.required]);
-    // this.cryptoBitcoinSGPriceFormControl.updateValueAndValidity();  
-    this.qrCodeOrBitCoinAddressFormControl.setValidators([Validators.required]);
-    this.qrCodeOrBitCoinAddressFormControl.updateValueAndValidity();  
-    this.cryptoSGPriceFormControl.setValidators([Validators.required]);
-    this.cryptoSGPriceFormControl.updateValueAndValidity();  
-    // this.genderFormControl.setValidators([Validators.required]);
-    // this.genderFormControl.updateValueAndValidity();  
+    this.form.reset();
+    // form.resetAll(); // gives error in console
+    // console.log("resetForm activated")
   }
 }
 
